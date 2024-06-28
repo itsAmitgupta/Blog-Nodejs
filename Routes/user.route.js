@@ -11,7 +11,7 @@ router.get('/signup',(req,res)=>{
 
 router.post('/signin',async (req,res)=>{
     const {email,password} = req.body;
-
+    console.log(email,password)
     const isMatched = await User.matchPassword(email , password)
 
     return res.redirect('/');
@@ -19,7 +19,7 @@ router.post('/signin',async (req,res)=>{
 
 router.post('/signup',async(req,res)=>{
         const{fullName,email,password} = req.body;
-
+        console.log(fullName,email,password);
         await User.create({
             fullName,
             email,
