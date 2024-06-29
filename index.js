@@ -19,16 +19,26 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use(cookieParser())
 app.use(checkForAuthenticationCookie('token'))
+app.use(express.static(path.resolve('./public')))
 
+const Blog = require('./Models/blog.model')
 
-app.get("/", (req, res) => {
+app.get("/",async (req, res) => {
+  const allBlog = await Blog.find({});
   res.render("home",{
-    user:req.user
+    user:req.user,
+    blogs:allBlog
   });
 });
 
+
+//Router
+
 const userRouter = require("./Routes/user.route");
 app.use("/user", userRouter);
+
+const blogRouter = require("./Routes/blog.route")
+app.use("/blog",blogRouter)
 
 app.listen(PORT, () => {
   console.log(`server is started and running on http://localhost:${PORT}`);
