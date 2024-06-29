@@ -9,17 +9,27 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Add Blog</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Amit Gupta
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">LogOut</a></li>
-            </ul>
-          </li>
+          <% if (locals.user) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Add Blog</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <%= locals.user.fullName %>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="/user/logout">LogOut</a></li>
+              </ul>
+            </li> 
+          <% } else{ %>
+            <li class="nav-item">
+              <a class="nav-link" href="/user/signup">Create Account</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/user/signin">Signin</a>
+            </li>
+          <% } %>
+          
         </ul>
       </div>
     </div>
